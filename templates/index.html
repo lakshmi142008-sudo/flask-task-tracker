@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Daily Task Tracker</title>
+    <style>
+        body { font-family: Arial; margin: 40px; }
+        h2 { color: #333; }
+        .task { margin-bottom: 10px; }
+        .completed { text-decoration: line-through; color: green; }
+        button { margin-left: 10px; }
+    </style>
+</head>
+<body>
+
+<h2>Daily Task Tracker</h2>
+
+<form action="/add" method="POST">
+    <input type="text" name="task" placeholder="Enter a task" required>
+    <button type="submit">Add</button>
+</form>
+
+<hr>
+
+{% for t in tasks %}
+    <div class="task">
+        <span class="{{ 'completed' if t.completed }}">{{ t.task }}</span>
+        <a href="/complete/{{ loop.index0 }}"><button>✔ Complete</button></a>
+        <a href="/delete/{{ loop.index0 }}"><button>❌ Delete</button></a>
+    </div>
+{% endfor %}
+
+</body>
+</html>
